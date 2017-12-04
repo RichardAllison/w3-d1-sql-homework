@@ -367,3 +367,16 @@ UPDATE movies SET show_time = '21:30' WHERE id = 11;
 -- ## Extension
 --
 -- 1. Research how to delete multiple entries from your table in a single command.
+DELETE FROM movies WHERE id BETWEEN 2 AND 8;
+-- SELECT * FROM movies;
+-- id |                title                | year | show_time
+-- ----+-------------------------------------+------+-----------
+--  1 | Iron Man                            | 2008 | 17:30
+-- 10 | Captain America: The Winter Soldier | 2014 | 20:15
+-- 12 | Avengers: Age of Ultron             | 2015 | 21:10
+-- 13 | Ant-Man                             | 2015 | 20:40
+-- 14 | Captain America: Civil War          | 2016 | 13:50
+-- 15 | Doctor Strange                      | 2016 | 21:30
+-- 16 | Guardians of the Galaxy 2           | 2017 | 15:50
+-- 17 | Guardians of the Galaxy 2           | 2017 | 00:00
+-- 11 | Guardians of the Galaxy             | 2014 | 21:30
