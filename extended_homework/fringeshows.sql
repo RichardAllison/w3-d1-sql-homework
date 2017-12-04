@@ -232,13 +232,6 @@ SELECT "name", "price" FROM "shows" ORDER BY "price" LIMIT 1 OFFSET 1;
 -- Best of Burlesque |  7.99
 -- (1 row)
 
--- SELECT MIN("price") FROM "shows" WHERE "price" > (SELECT MIN("price") FROM "shows");
-
--- min
--- ------
--- 7.99
--- (1 row)
-
 --   8. Select the names of all users whose names start with the letter "M".
 SELECT * FROM "users" WHERE "name" LIKE 'M%';
 -- id |     name
@@ -250,7 +243,7 @@ SELECT * FROM "users" WHERE "name" LIKE 'M%';
 
 --   9. Select the names of users whose names contain "er".
 SELECT * FROM "users" WHERE "name" like '%er%';
--- id |       name       
+-- id |       name
 -- ----+------------------
 --  1 | John Harper
 -- 14 | Douglas Sangster
@@ -264,8 +257,58 @@ SELECT * FROM "users" WHERE "name" like '%er%';
 
 --   10. Select the time for the Edinburgh Royal Tattoo.
 
+SELECT "time" FROM "times" WHERE show_id = (SELECT id FROM "shows" WHERE "name" = 'Edinburgh Royal Tattoo');
+-- time
+-- -------
+-- 22:00
+-- (1 row)
+SELECT "time" FROM "times" JOIN "shows" ON times.show_id=shows.id WHERE "name" = 'Edinburgh Royal Tattoo';
+-- time
+-- -------
+-- 22:00
+-- (1 row)
+
+-- time
+-- -------
+-- 22:00
+-- (1 row)
+
 --   11. Select the number of users who want to see "Shitfaced Shakespeare".
 
+SELECT COUNT(*) FROM "users" JOIN "shows_users" ON shows_users.user_id=users.id WHERE show_id = 2;
+
+-- SELECT COUNT(*) FROM "users" WHERE "shows_users" WHERE show_id = 2;
+
+
 --   12. Select all of the user names and the count of shows they're going to see.
+SELECT users.name, COUNT(shows_users.show_id)
+  FROM shows_users JOIN users
+    ON shows_users.user_id=users.id
+ GROUP BY users.name;
+--  name       | count
+-- ------------------+-------
+--  Alex Bazlinton   |     6
+--  Eric Carles      |     6
+--  John Harper      |     5
+--  Manny Chita      |     1
+--  Vishal Sharma    |     1
+--  Joe Plevin       |     1
+--  Joe Ryan         |     4
+--  Amy Morrison     |     1
+--  Olga Maunsell    |     5
+--  Giuseppe Ibba    |     7
+--  David Rawson     |     5
+--  Alison Wood      |     4
+--  Douglas Sangster |     8
+--  Dave Ellis       |     4
+--  Mark Blanford    |     5
+--  Ross Hill        |     6
+--  Richard Allison  |     4
+--  Craig Morton     |     5
+--  Robert Henderson |     1
+--  Graeme Brown     |     7
+-- (20 rows)
+
+
 
 --   13. SELECT all users who are going to a show at 17:15.
