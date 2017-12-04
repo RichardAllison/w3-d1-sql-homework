@@ -226,11 +226,37 @@ SELECT "name", "price" FROM "shows" WHERE "price" in (SELECT MAX("price") from "
 -- (1 row)
 
 --   7. Select the name and price of the second from cheapest show.
+SELECT "name", "price" FROM "shows" ORDER BY "price" LIMIT 1 OFFSET 1;
+-- name        | price
+-- -------------------+-------
+-- Best of Burlesque |  7.99
+-- (1 row)
+
+-- SELECT MIN("price") FROM "shows" WHERE "price" > (SELECT MIN("price") FROM "shows");
+
+-- min
+-- ------
+-- 7.99
+-- (1 row)
 
 --   8. Select the names of all users whose names start with the letter "M".
+SELECT * FROM "users" WHERE "name" LIKE 'M%';
+-- id |     name
+-- ----+---------------
+-- 13 | Mark Blanford
+-- 18 | Manny Chita
+-- 22 | Max Robson
+-- (3 rows)
 
 --   9. Select the names of users whose names contain "er".
-
+SELECT * FROM "users" WHERE "name" like '%er%';
+-- id |       name       
+-- ----+------------------
+--  1 | John Harper
+-- 14 | Douglas Sangster
+-- 16 | Kris Anderson
+-- 21 | Robert Henderson
+-- (4 rows)
 
 -- ## Section 2
 
