@@ -268,10 +268,6 @@ SELECT "time" FROM "times" JOIN "shows" ON times.show_id=shows.id WHERE "name" =
 -- 22:00
 -- (1 row)
 
--- time
--- -------
--- 22:00
--- (1 row)
 
 --   11. Select the number of users who want to see "Shitfaced Shakespeare".
 
@@ -310,5 +306,25 @@ SELECT users.name, COUNT(shows_users.show_id)
 -- (20 rows)
 
 
-
 --   13. SELECT all users who are going to a show at 17:15.
+SELECT name FROM users
+JOIN shows_users
+ON users.id=shows_users.user_id
+JOIN times
+ON shows_users.show_id=times.show_id
+WHERE times.time = '17:15';
+-- name
+-- ------------------
+-- John Harper
+-- Alex Bazlinton
+-- Joe Ryan
+-- Olga Maunsell
+-- Graeme Brown
+-- Mark Blanford
+-- Giuseppe Ibba
+-- David Rawson
+-- Ross Hill
+-- Mark Blanford
+-- Eric Carles
+-- Douglas Sangster
+-- (12 rows)
