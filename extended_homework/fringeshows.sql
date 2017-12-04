@@ -172,7 +172,7 @@ INSERT INTO "shows_users" (show_id, user_id) VALUES (11, 21);
 --   This section involves more complex queries.  You will need to go and find out about aggregate funcions in SQL to answer some of the next questions.
 --
 --   1. Select the names and prices of all shows, ordered by price in ascending order.
-SELECT "name", "price" FROM "shows" ORDER BY "price";
+-- SELECT "name", "price" FROM "shows" ORDER BY "price";
 -- name                   | price
 -- -----------------------------------------+-------
 -- Two girls, one cup of comedy            |  6.00
@@ -192,24 +192,38 @@ SELECT "name", "price" FROM "shows" ORDER BY "price";
 
 
 --   2. Select the average price of all shows.
-SELECT AVG("price") FROM "shows";
+-- SELECT AVG("price") FROM "shows";
 -- avg
 -- ---------------------
 -- 15.9569230769230769
 -- (1 row)
 
 --   3. Select the price of the least expensive show.
-SELECT MIN("price") FROM "shows";
+-- SELECT MIN("price") FROM "shows";
 -- min
 -- ------
 --  6.00
 -- (1 row)
 
 --   4. Select the sum of the price of all shows.
+-- SELECT SUM("price") FROM "shows";
+-- sum
+-- --------
+--  207.44
+-- (1 row)
 
 --   5. Select the sum of the price of all shows whose prices is less than £20.
+-- SELECT SUM("price") FROM "shows" WHERE "price" < 20;
+-- sum
+-- --------
+-- 142.45
 
 --   6. Select the name and price of the most expensive show.
+SELECT "name", "price" FROM "shows" WHERE "price" in (SELECT MAX("price") from "shows");
+-- name          | price
+-- ------------------------+-------
+-- Edinburgh Royal Tattoo | 32.99
+-- (1 row)
 
 --   7. Select the name and price of the second from cheapest show.
 
